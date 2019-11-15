@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:28:57 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/15 12:12:10 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/15 13:03:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,25 +65,20 @@ size_t			ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (lensrc + lendst);
 }
 
-
-
-
-#include<stdio.h>
-size_t			ft_strlcat_malloc(char *dst, char *src, size_t maxlen)
+size_t			ft_strlcat_malloc(char **dst, char *src, size_t maxlen)
 {
 	char	*new;
 	size_t	length;
 	size_t	dstlen;
 
 	dstlen = 0;
-	//if (dst)
-		dstlen = ft_strlen(dst);
+	//if (*dst)
+		dstlen = ft_strlen(*dst);
 	new = malloc((dstlen + ft_strnlen(src, maxlen) + 1) * sizeof(char));
 	new[0] = '\0';
-	ft_strlcat(new, dst, dstlen + 1);
-	//free(dst);
-	length = ft_strlcat(new, src, ft_strnlen(src, maxlen));
-	printf("ICI|||%s|||ICI\n", new);
-	dst = new;
+	ft_strlcat(new, *dst, dstlen + 1);
+	//free(*dst);
+	length = ft_strlcat(new, src, maxlen);
+	*dst = new;
 	return (length);
 }
