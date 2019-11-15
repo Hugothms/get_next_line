@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:29:03 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/14 19:40:22 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/15 12:13:55 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,6 @@ void	ft_putstr(const char* str)
 	while(str[i])
 		write(1, str + i++, 1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 size_t	end_of_line_reached(char *str)
 {
@@ -55,10 +43,13 @@ void	set_static_str(char dst[], char *src)
 	while (src[i])
 	{
 		dst[i] = src[i];
+		i++;
 	}
 	dst[i] = src[i];
 }
 
+
+#include<stdio.h>
 int		get_next_line(int fd, char **line)
 {
 	char static	overflow[OPEN_MAX][BUFFER_SIZE + 2];
@@ -77,32 +68,40 @@ int		get_next_line(int fd, char **line)
 	{
 		ft_putstr("OK1\n");
 		bytes_read = read(fd, buff, BUFFER_SIZE);
-		buff[BUFFER_SIZE] = '\0';
+		buff[bytes_read] = '\0';
 		if (bytes_read < 0)
 			return (ERR);
 		cpt += bytes_read;
-		//printf("%s",buff);
+		printf("buff|%s|\n",buff);
 		ft_putstr("OK2\n");
-		if((eol = end_of_line_reached(buff)) && (int)eol != -1)
+		if((eol = end_of_line_reached(buff)) && (int)eol != -1) //si buff n'est pas vide
 		{
 			if (overflow[fd][0])
+			{
+				ft_putstr("Overflow\n");
 				ft_strlcat_malloc(*line, overflow[fd], ft_strlen(overflow[fd]));
-			qqpart = ft_strlcat_malloc(*line, buff, eol);/*-+1*/
-			ft_putstr(*line);
+			}
+			qqpart = ft_strlcat_malloc(*line, buff, eol - 1);/*-+1*/
+			//ft_putstr(*line);
 			ft_putstr("OK3\n");
 			set_static_str(overflow[fd], buff + eol + 1);/*+-1*/
-			return (1);
+			return (OK);
 		}
 	}
 	ft_putstr("OK4\n");
 	if (cpt == 0)
 	{
-		free(*line);
-		return (0);
+		//free(*line);
+		return (END);
 	}
 	ft_putstr("OK\n");
-	return (1);//?
+	return (0);//?
 }
+
+
+
+
+
 
 
 
@@ -125,12 +124,13 @@ int main(int argc, char const *argv[])
 		nb_line = 0;
 		while((ret = get_next_line(fd, &line)) == 1)
 		{
-			ft_putstr("Line number:");
+			ft_putstr("**************************************\n");
+			ft_putstr("LINE NUMBER: ");
 			c = '0' + nb_line++;
 			write(1, &c, 1);
-			ft_putstr("\n");
+			ft_putstr("\nLINE:\t");
 			ft_putstr(line);
-			ft_putstr("\n");
+			ft_putstr("\n\n\n");
 		}
 		if (ret == 0)
 			ft_putstr("\nReached EOF\n");
@@ -142,23 +142,30 @@ int main(int argc, char const *argv[])
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
+		{
+			ft_putstr("Can't open the file\n");
 			return (-1);
+		}
 		nb_line = 0;
 		while((ret = get_next_line(fd, &line)) == 1)
 		{
-			ft_putstr("Line number:");
+			ft_putstr("**************************************\n");
+			ft_putstr("LINE NUMBER: ");
 			c = '0' + nb_line++;
 			write(1, &c, 1);
-			ft_putstr("\n");
+			ft_putstr("\nLINE:\t");
 			ft_putstr(line);
-			ft_putstr("\n");
+			ft_putstr("\n\n\n");
 		}
 		if (ret == 0)
 			ft_putstr("\nReached EOF\n");
 		else
 			ft_putstr("\nERROR BITCH\n");
 		if (close(fd) == -1)
+		{
+			ft_putstr("Can't close the file\n");
 			return (-2);
+		}
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:29:01 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/14 19:33:56 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/15 11:43:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #endif
 # define END_OF_LINE '\n'
 # define ERR -1
+# define END 0
+# define OK 1
 
 
 # include <unistd.h>
