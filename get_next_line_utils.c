@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:28:57 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/15 13:03:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/17 18:27:56 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,21 @@ size_t			ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (lensrc + lendst);
 }
 
-size_t			ft_strlcat_malloc(char **dst, char *src, size_t maxlen)
+size_t			ft_strlcat_malloc(char **line, char *src, size_t maxlen)
 {
 	char	*new;
 	size_t	length;
-	size_t	dstlen;
+	size_t	linelen;
 
-	dstlen = 0;
-	//if (*dst)
-		dstlen = ft_strlen(*dst);
-	new = malloc((dstlen + ft_strnlen(src, maxlen) + 1) * sizeof(char));
+	linelen = 0;
+	//if (*line)
+		linelen = ft_strlen(*line);
+	new = malloc((linelen + ft_strnlen(src, maxlen) + 1) * sizeof(char));
 	new[0] = '\0';
-	ft_strlcat(new, *dst, dstlen + 1);
-	//free(*dst);
+	ft_strlcat(new, *line, linelen + 1);
+	if(**line)
+		free(*line);
 	length = ft_strlcat(new, src, maxlen);
-	*dst = new;
+	*line = new;
 	return (length);
 }

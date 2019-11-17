@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:29:03 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/17 18:54:14 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/17 18:42:36 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		get_next_line(int fd, char **line)
 
 	bytes_read = 1;
 	cpt = 0;
-	//smthg = 0;
+	smthg = 0;
 	if(!(*line = malloc(sizeof(char))))
 		return (ERR);
 	*line = "\0";
@@ -92,10 +92,12 @@ int		get_next_line(int fd, char **line)
 				printf("len:%zu\n", ft_strlen(*line));
 			}
 			if (!ft_strlen(*line) || overflow[fd][tmp+2] != '\n') // si la ligne est vide ou  si l'overflow fini par un \n
-				smthg = ft_strlcat_malloc(line, buff, ft_strlen(*line) + eol + 1);
+				smthg = ft_strlcat_malloc(line, buff, ft_strlen(*line) + eol + 1);/*-+1*/
 			printf("line created:|%s|\n", *line);
-			printf("strlcat:%zu\n", smthg);
-			printf("BUFFSIZ:%zu\n", ft_strlen(*line));
+			printf("return strlcat:%zu\n", smthg);
+			printf("return BUFFSIZ:%zu\n", ft_strlen(*line));
+
+
 			if (eol != BUFFER_SIZE && buff[eol + 1])
 			{
 				set_static_str(overflow[fd], buff + eol + 1);
@@ -103,12 +105,15 @@ int		get_next_line(int fd, char **line)
 				return (OK);
 			}
 
-			//printf("__________________________%c____________________________\n", buff[smthg-1]);
-			if (!(smthg % BUFFER_SIZE) /*&& (buff) && (buff[smthg + 1] == '\n')*/)
+			printf("__________________________%c____________________________\n", buff[smthg-1]);
+
+			/*
+			if (!(smthg % BUFFER_SIZE) && (buff) && (buff[smthg + 1] == '\n'))
 			{
 				printf("smthg:%zu\n", smthg);
 				return (OK);
 			}
+			*/
 
 		}
 
