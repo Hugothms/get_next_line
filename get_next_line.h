@@ -6,12 +6,19 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:29:01 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/18 15:48:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/18 16:29:41 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# ifdef BUFFER_SIZE
+#  if BUFFER_SIZE <= 0
+#   undef BUFFER_SIZE
+#   define BUFFER_SIZE 0
+#  endif
+# endif
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 8

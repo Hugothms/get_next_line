@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:47:39 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/18 16:05:05 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/18 16:26:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int		get_next_line(int fd, char **line)
 	static char	buff[BUFFER_SIZE + 2];
 	size_t		bytes_read;
 
+	if (BUFFER_SIZE == 0)
+		return (ERR);
 	if (!(*line = malloc(sizeof(char))))
 		return (ERR);
 	*line = "\0";
