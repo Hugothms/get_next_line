@@ -6,11 +6,25 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:47:39 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/18 15:50:07 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/18 16:05:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	find_pos_eol(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	if (!str[i])
+		return (0);
+	while (str[i] && str[i] != END_OF_LINE)
+		i++;
+	if (str[i] == END_OF_LINE)
+		return (i);
+	return (i);
+}
 
 int		just_do_it(char **line, char *buff)
 {

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:28:57 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/18 15:32:46 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/18 16:04:59 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 			*lastd-- = *lasts--;
 	}
 	return (dst);
-}
-
-size_t	find_pos_eol(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	if (!str[i])
-		return (0);
-	while (str[i] && str[i] != END_OF_LINE)
-		i++;
-	if (str[i] == END_OF_LINE)
-		return (i);
-	return (i);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
