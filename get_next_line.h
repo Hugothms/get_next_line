@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:29:01 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/18 11:52:53 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/18 15:48:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,12 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
+int				get_next_line(int fd, char **line);
 size_t			find_pos_eol(const char *line);
 size_t			ft_strlen(const char *str);
-size_t			ft_strnlen(const char *str, size_t sizemax);
-void			*ft_memcpy(void *dst, const void *src, size_t n);
-size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
-size_t			ft_strlcat_malloc(char **dst, char *src, size_t maxlen);
 int				get_next_line(int fd, char **line);
-
-
-void	*ft_memmove(void *dst, const void *src, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-void	*ft_bzero(void *b, size_t len);
+void			*ft_memmove(void *dst, const void *src, size_t len);
+char			*ft_strjoin(char const *s1, char const *s2);
+void			*ft_bzero(void *b, size_t len);
 
 #endif
