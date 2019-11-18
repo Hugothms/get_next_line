@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:29:01 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/18 16:29:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/18 16:45:40 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #   define BUFFER_SIZE 0
 #  endif
 # endif
-
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 8
 # endif
