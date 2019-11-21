@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:47:39 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/19 10:16:10 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/21 17:16:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,33 @@ size_t	find_pos_eol(const char *str)
 		return (0);
 	while (str[i] && str[i] != END_OF_LINE)
 		i++;
-	if (str[i] == END_OF_LINE)
-		return (i);
 	return (i);
 }
 
-int		just_do_it(char **line, char buff[][BUFFER_SIZE + 2], int fd)
+int		fill_line_with_buff(char **line, char buff[][BUFFER_SIZE + 2], int fd)
 {
 	size_t		tmp;
 	size_t		eol;
-	size_t		x;
 
+	if (!*buff[fd] && **line)
+		return (OK);
+	if (*buff[fd] == END_OF_LINE && !buff[fd][1])
+	{
+		ft_memmove(buff[fd], &buff[fd][1], 1);
+		return (OK);
+	}
 	eol = find_pos_eol(buff[fd]);
-	*line = ft_strjoin(*line, buff[fd]);
 	tmp = ft_strlen(&buff[fd][eol]);
-	x = (buff[fd][eol] == '\n');
+	*line = ft_strjoin(*line, &buff[fd][(buff[fd][0] == END_OF_LINE)]);
+	if (*buff[fd] == END_OF_LINE)
+		**line = '\0';
 	ft_memmove(buff[fd], &buff[fd][eol] + 1, tmp + 1);
 	buff[fd][tmp] = '\0';
 	if (tmp != BUFFER_SIZE)
 		ft_bzero(&buff[fd][tmp], eol);
-	return (x);
+	if (tmp)
+		return (OK);
+	return (0);
 }
 
 int		get_next_line(int fd, char **line)
@@ -53,9 +60,9 @@ int		get_next_line(int fd, char **line)
 	if (!(*line = malloc(sizeof(char))))
 		return (ERR);
 	*line = "\0";
-	while (buff[fd][0])
+	while (*buff[fd])
 	{
-		if (just_do_it(line, buff, fd))
+		if (fill_line_with_buff(line, buff, fd))
 			return (OK);
 	}
 	while ((bytes_read = read(fd, buff[fd], BUFFER_SIZE)))
@@ -63,7 +70,7 @@ int		get_next_line(int fd, char **line)
 		if (bytes_read < 0)
 			return (ERR);
 		buff[fd][bytes_read] = '\0';
-		if (just_do_it(line, buff, fd))
+		if (fill_line_with_buff(line, buff, fd))
 			return (OK);
 	}
 	return (END);
