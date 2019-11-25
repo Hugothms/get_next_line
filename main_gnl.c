@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:52:49 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/19 10:22:36 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/21 11:50:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main(int argc, char const *argv[])
 	int		i;
 	int		ret[argc];
 	int		nb_line;
+	int		eof[argc];
 
 	if (argc == 1)
 	{
@@ -35,6 +36,7 @@ int main(int argc, char const *argv[])
 			printf("\nReached EOF\n");
 		else
 			printf("\nERROR BITCH\n");
+		return (0);
 	}
 	i = 1;
 	///////////////////////////////////////////////////////////////////////////
@@ -52,37 +54,45 @@ int main(int argc, char const *argv[])
 	i = 1;
 	line[0] = malloc(1);
 	line[1] = malloc(1);
+	eof[0] = 0;
+	eof[1] = 0;
 	while ((ret[0] = get_next_line(fd[1], &line[0])) && (ret[1] = get_next_line(fd[2], &line[1])))
 	{
-			printf("\t\t\t*******\tLINE NUMBER:%d\n\t\t\t*******\tFILE:%s\n", nb_line, argv[1]);
-			printf("LINE:|%s|\n\n", line[0]);
+			//printf("\t\t\t*******\tNUMBER:%d\n\t\t\t*******\tFILE:%s\n", nb_line, argv[1]);
+			printf("LINE:|%s|\n", line[0]);
 
-			printf("\t\t\t*******\tLINE NUMBER:%d\n\t\t\t*******\tFILE:%s\n", nb_line, argv[2]);
+			//printf("\t\t\t*******\tNUMBER:%d\n\t\t\t*******\tFILE:%s\n", nb_line, argv[2]);
 			printf("LINE:|%s|\n\n", line[1]);
 			nb_line++;
 			i++;
 	}
 	if (ret[0] == 0)
+	{
+		eof[0] = 1;
 		printf("Reached EOF:%s\n", argv[1]);
+	}
 	if (ret[1] == 0)
-		printf("Reached EOF:%s\n", argv[2]);
+	{
+		eof[1] = 1;
+		printf("Reached EOF:%s\n\n", argv[2]);
+	}
 	while ((ret[0] = get_next_line(fd[1], &line[0])))
 	{
-		printf("\t\t\t*******\tLINE NUMBER:%d\n\t\t\t*******\tFILE:%s\n", nb_line, argv[1]);
-		printf("LINE:|%s|\n\n", line[0]);
+		//printf("\t\t\t*******\tNUMBER:%d\n\t\t\t*******\tFILE:%s\n", nb_line, argv[1]);
+		printf("LINE:|%s|\n", line[0]);
 		i++;
 		nb_line++;
 	}
 	while ((ret[1] = get_next_line(fd[2], &line[1])))
 	{
-		printf("\t\t\t*******\tLINE NUMBER:%d\n\t\t\t*******\tFILE:%s\n", nb_line, argv[2]);
-		printf("LINE:|%s|\n\n", line[1]);
+		//printf("\t\t\t*******\tNUMBER:%d\n\t\t\t*******\tFILE:%s\n", nb_line, argv[2]);
+		printf("LINE:|%s|\n", line[1]);
 		nb_line++;
 		i++;
 	}
-	if (ret[0] == 0)
+	if (!eof[0] && ret[0] == 0)
 		printf("Reached EOF:%s\n", argv[1]);
-	else if (ret[1] == 0)
+	else if (!eof[1] && ret[1] == 0)
 		printf("Reached EOF:%s\n", argv[2]);
 	else
 		printf("ERROR BITCH\n");

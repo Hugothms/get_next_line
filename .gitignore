@@ -1,3 +1,4 @@
 .vscode/c_cpp_properties.json
 a.out.dSYM/Contents/Info.plist
 a.out.dSYM/Contents/Resources/DWARF/a.out
+.DS_Store
