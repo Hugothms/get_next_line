@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:47:39 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/25 18:03:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/25 18:12:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ size_t	find_pos_eol(const char *str)
 		i++;*/
 	while (str[i] && str[i] != END_OF_LINE)
 		i++;
-	if (str[i] == END_OF_LINE)
-		return (i);
 	return (i);
 }
 #include<stdio.h>
@@ -108,7 +106,7 @@ int		get_next_line(int fd, char **line)
 	if (!(*line = malloc(sizeof(char))))
 		return (ERR);
 	*line = "\0";
-	while (buff[fd][0])
+	while (*buff[fd])
 	{
 		// printf("BUFF\n");
 		if (fill_line_with_buff(line, buff[fd], 1))

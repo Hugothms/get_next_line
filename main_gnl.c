@@ -6,14 +6,14 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:52:49 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/21 11:50:50 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/25 18:13:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-int main(int argc, char const *argv[])
+int	main(int argc, char const *argv[])
 {
 	int		fd[argc];
 	char	*line[2];
@@ -26,11 +26,11 @@ int main(int argc, char const *argv[])
 	{
 		fd[0] = 0;
 		nb_line = 1;
-		while((ret[0] = get_next_line(fd[0], line)) == 1)
+		while ((ret[0] = get_next_line(fd[0], line)) == 1)
 		{
-			printf("*************************************************************\n");
+			printf("*************************************\n");
 			printf("LINE NUMBER: %d", nb_line++);
-			printf("\nLINE:|%s|\n\n\n", *line);
+			printf("\n|%s|\n\n\n", *line);
 		}
 		if (ret[0] == 0)
 			printf("\nReached EOF\n");
@@ -104,8 +104,8 @@ int main(int argc, char const *argv[])
 			printf("Can't close the file\n");
 			return (-2);
 		}
-		if (*line[i-1])
-			free (line[i-1]);
+		if (*line[i - 1])
+			free(line[i - 1]);
 		i++;
 	}
 	return (0);
