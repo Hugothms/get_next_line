@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:28:57 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/25 18:12:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/11/29 12:56:56 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	lens2;
 	int		i;
 
-	if (!s1 || !s2)
-		return (NULL);
 	i = 0;
-	if (s2[i] == '\n')
-		i++;
-	lens1 = ft_strlen(s1);
+	lens1 = (!s1) ? 0 : ft_strlen(s1);
 	lens2 = find_pos_eol(&s2[i]);
 	if (!(new = malloc((lens1 + lens2 + 1) * sizeof(char))))
 		return (NULL);
