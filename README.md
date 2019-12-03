@@ -5,7 +5,7 @@ __Installation:__
 * `git clone https://github.com/Hugothms/get_next_line.git`
 
 **Usage:** 
-* get next line is a function that reads a file line by line
+* get next line is a function that reads a file descriptor line by line and return a line for each call
 
 **Parameters:**  
 1.`file descriptor for reading`  
