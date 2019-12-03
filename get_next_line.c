@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:47:39 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/29 12:55:42 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/12/03 11:24:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ size_t	find_pos_eol(const char *str)
 	return (i);
 }
 
-int		fill_line_with_buff(char **line, char buff[][BUFFER_SIZE + 2], int fd)
+int		fill_line_with_buff(char **line, char buff[][BUFFER_SIZE + 1], int fd)
 {
-	size_t		tmp;
+	size_t		len;
 	size_t		eol;
-	char		*qwerty;
+	char		*tmp;
 
 	if (!*buff[fd] && **line)
 		return (OK);
@@ -38,29 +38,29 @@ int		fill_line_with_buff(char **line, char buff[][BUFFER_SIZE + 2], int fd)
 		return (OK);
 	}
 	eol = find_pos_eol(buff[fd]);
-	tmp = ft_strlen(&buff[fd][eol]);
-	qwerty = *line;
-	*line = ft_strjoin(qwerty, &buff[fd][(buff[fd][0] == END_OF_LINE)]);
-	free(qwerty);
-	if (*buff[fd] == END_OF_LINE)
-		**line = '\0';
-	ft_memmove(buff[fd], &buff[fd][eol] + 1, tmp + 1);
-	buff[fd][tmp] = '\0';
-	if (tmp != BUFFER_SIZE)
-		ft_bzero(&buff[fd][tmp], eol);
-	if (tmp)
+	len = ft_strlen(&buff[fd][eol]);
+	tmp = *line;
+	*line = ft_strjoin(tmp, &buff[fd][0]);
+	free(tmp);
+	ft_memmove(buff[fd], &buff[fd][eol] + 1, len + 1);
+	buff[fd][len] = '\0';
+	if (len != BUFFER_SIZE)
+		ft_bzero(&buff[fd][len], eol);
+	if (len)
 		return (OK);
 	return (0);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	static char	buff[OPEN_MAX][BUFFER_SIZE + 2];
+	static char	buff[OPEN_MAX + 2][BUFFER_SIZE + 1];
 	size_t		bytes_read;
 
-	if (BUFFER_SIZE == 0 || fd < 0 || line == NULL)
+	if (BUFFER_SIZE == 0 || fd < 0 || fd > OPEN_MAX + 2 || !line)
 		return (ERR);
-	*line = NULL;
+	if (!(*line = malloc(sizeof(char))))
+		return (-1);
+	**line = 0;
 	while (*buff[fd])
 	{
 		if (fill_line_with_buff(line, buff, fd))

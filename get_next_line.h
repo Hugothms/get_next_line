@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:29:01 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/29 12:56:09 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/12/02 21:13:28 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #  endif
 # endif
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 1
 # endif
 # define END_OF_LINE '\n'
 # define ERR -1
