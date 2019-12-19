@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:47:39 by hthomas           #+#    #+#             */
-/*   Updated: 2019/12/03 11:24:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2019/12/19 13:38:42 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	find_pos_eol(const char *str)
 	return (i);
 }
 
-int		fill_line_with_buff(char **line, char buff[][BUFFER_SIZE + 1], int fd)
+int		fill_line_with_buff(char **line, char buff[][BUFFER_SIZE + 2], int fd)
 {
 	size_t		len;
 	size_t		eol;
@@ -48,18 +48,18 @@ int		fill_line_with_buff(char **line, char buff[][BUFFER_SIZE + 1], int fd)
 		ft_bzero(&buff[fd][len], eol);
 	if (len)
 		return (OK);
-	return (0);
+	return (END);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	static char	buff[OPEN_MAX + 2][BUFFER_SIZE + 1];
+	static char	buff[OPEN_MAX + 1][BUFFER_SIZE + 2];
 	size_t		bytes_read;
 
-	if (BUFFER_SIZE == 0 || fd < 0 || fd > OPEN_MAX + 2 || !line)
+	if (BUFFER_SIZE == 0 || fd < 0 || fd > OPEN_MAX + 1 || !line)
 		return (ERR);
 	if (!(*line = malloc(sizeof(char))))
-		return (-1);
+		return (ERR);
 	**line = 0;
 	while (*buff[fd])
 	{

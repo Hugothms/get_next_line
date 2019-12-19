@@ -35,18 +35,17 @@ int        main(int argc, char **argv)
         fd = 0;
     while ((ret = get_next_line(fd, &line)) == 1)
     {
-        printf("ret: %d line = |%s|\n", ret, line);
+        printf("\nret: %d line = |%s|\n", ret, line);
         free(line);
     }
     if (ret == 0)
     {
-        printf("\nret: %d line = |%s|\n\n", ret, line);
+        printf("\nret: %d line = |%s|\n", ret, line);
         free(line);
     }
 	else if (ret == -1)
     {
-        printf("ERROR\n");
-		printf("\nret: %d line = |%s|\n\n", ret, line);
+		printf("\nret: %d line = |%s|\n", ret, line);
         free(line);
     }
       // system("leaks a.out");
