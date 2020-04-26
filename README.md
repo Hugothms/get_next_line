@@ -19,6 +19,7 @@ __Installation:__
 * `return 0 when it finished reading a file`
 * `return -1 when an error occurs`
 
+
 **Return value:**
 1 : A line has been read
 0 : EOF has been reached
