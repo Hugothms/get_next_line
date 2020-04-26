@@ -7,10 +7,10 @@ __Installation:__
 * `git clone https://github.com/Hugothms/get_next_line.git`
 
 **Parameters:**  
-1.`file descriptor for reading`  
-2.`The value of what has been read`
+1.file descriptor for reading  
+2.The value of what has been read
 
 **Return value:**
-* `return 1 when it read a line`
-* `return 0 when EOF is reach`
-* `return -1 when an error occurs`
+* `return 1` when it read a line
+* `return 0` when EOF is reach
+* `return -1` when an error occurs
