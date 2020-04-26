@@ -1,4 +1,7 @@
-# get_next_line
+# Get Next Line
+Reading a line on a fd is way too tedious  
+Summary: The aim of this project is to make you code a function that returns a line
+ending with a newline, read from a file descriptor.  
 
 __Installation:__
 
@@ -15,7 +18,6 @@ __Installation:__
 * `return 1 when it read a line`
 * `return 0 when it finished reading a file`
 * `return -1 when an error occurs`
-
 
 **Return value:**
 1 : A line has been read
