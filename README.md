@@ -1,4 +1,7 @@
 # Get Next Line
+
+[![hthomas' 42 Project Score](https://badge42.herokuapp.com/api/project/hthomas/get_next_line)](https://github.com/JaeSeoKim/badge42)
+
 Summary: The aim of this project is to make you code a function that returns a line ending with a newline, read from a file descriptor.  
 
 __Installation:__
